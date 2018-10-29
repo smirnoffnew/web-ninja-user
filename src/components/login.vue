@@ -1,15 +1,37 @@
 <template>
   <div id="login">
       <div class="errors" >
-          <div v-for="err in errors">{{err}}
-            <v-btn fab dark small color="primary">
-                <v-icon dark>remove</v-icon>
-            </v-btn></div>
+          <!--<div v-for="err in errors">{{err}}-->
+            <!--<v-btn fab dark small color="primary">-->
+                <!--<v-icon dark>remove</v-icon>-->
+            <!--</v-btn></div>-->
       </div>
       <div class="containerLogin" style="margin-left: auto;margin-right: auto">
           <h3 style="font-style: italic">Autorization</h3>
           <form class="login-form">
-              <input type="text" v-model="email" placeholder="Email" /><br>
+            <div style="display: flex;justify-content: space-between; width: 100%;color:crimson">
+              <div>
+                Email required
+              </div>
+              <div>
+                Email invalid
+              </div>
+              <div>
+                *
+              </div>
+            </div>
+            <input type="text" v-model="email" placeholder="Email" /><br>
+            <div style="display: flex;justify-content: space-between; width: 100%;color:crimson">
+              <div>
+                Password required
+              </div>
+              <div>
+                min cheraters 8
+              </div>
+              <div>
+                *
+              </div>
+            </div>
               <input type="password" v-model="password" placeholder="Password"/>
               <p style="align-self: flex-end">
                 Forgot password?
@@ -67,7 +89,10 @@
     box-sizing: border-box;
     font-size: 14px;
     transition: all 1s;
-    border: 1px solid white;
+    border: 1px solid crimson;
+  }
+  h3{
+    padding: 20px 0;
   }
   .errors{
     position: absolute;
