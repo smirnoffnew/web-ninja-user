@@ -1,61 +1,79 @@
 <template>
   <div id="login">
-      <div class="errors" >
-          <!--<div v-for="err in errors">{{err}}-->
-            <!--<v-btn fab dark small color="primary">-->
-                <!--<v-icon dark>remove</v-icon>-->
-            <!--</v-btn></div>-->
-      </div>
       <div class="containerLogin" style="margin-left: auto;margin-right: auto">
-          <h3 style="font-style: italic">Autorization</h3>
+          <h3 >Autorization</h3>
           <form class="login-form">
-            <div style="display: flex;justify-content: space-between; width: 100%;color:crimson">
-              <div>
-                Email required
+              <input type="text" v-model="email" placeholder="Email" @input="mailValid()" required/>
+              <div class="errors">
+                  <div v-if="email == ''">
+                       Email required<span class="crimson">*</span>
+                  </div>
+                  <div  class="crimson" v-if="error_mail == 1">
+                       Email invalid
+                  </div>
               </div>
-              <div>
-                Email invalid
+              <input type="password" v-model="password" @input="passwordValid()" placeholder="Password" required/>
+              <div class="errors">
+                  <div v-if="password == ''">
+                      Password required<span class="crimson">*</span>
+                  </div>
+                  <div class="crimson" v-if="error_password == 1">
+                      min cheraters 8
+                  </div>
               </div>
-              <div>
-                *
-              </div>
-            </div>
-            <input type="text" v-model="email" placeholder="Email" /><br>
-            <div style="display: flex;justify-content: space-between; width: 100%;color:crimson">
-              <div>
-                Password required
-              </div>
-              <div>
-                min cheraters 8
-              </div>
-              <div>
-                *
-              </div>
-            </div>
-              <input type="password" v-model="password" placeholder="Password"/>
               <p style="align-self: flex-end">
                 Forgot password?
               </p>
-                <button @click="signIn()" >
-                  <span >Login</span>
-                  <!--<ng-template #spiner>-->
-                  <!--<div class="spinnerLoginRagistration" ></div>-->
-                  <!--</ng-template>-->
-                </button>
+              <button @click="autorization()" >
+                  <span v-if="loading == false">Login</span>
+                  <div v-if="loading == true" class="spinnerLoginRagistration" ></div>
+              </button>
           </form>
       </div>
   </div>
 </template>
 <script>
+  import Vue from 'vue'
+  // import 'material-design-icons-iconfont/dist/material-design-icons.css'
   export default {
-    name:'login',
-    data(){
-      return{
-        email:'',
-        password:'',
-        errors:[]
+      name:'login',
+      data(){
+          return{
+            email:'yarik.roterdamskiy@gmail.com',
+            password:'2363796z',
+            error_password:0,
+            error_mail:0,
+            loading:false
+          }
+      },
+      created(){
+
+      },
+      methods:{
+          mailValid(){
+              let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+              if(reg.test(this.email) == false) {
+                return this.error_mail = 1
+              }
+              return this.error_mail = 0
+          },
+          passwordValid(){
+              this.password.length < 8 && this.password != ''?this.error_password = 1:this.error_password = 0
+          },
+          autorization() {
+              this.loading = true
+              if (this.error_mail == 1 || this.error_password == 1){
+                  event.preventDefault();
+                  this.loading = false
+              } else {
+                  if(this.email != '' && this.password != ''){
+                      event.preventDefault();
+                      this.$store.state.requests.autorization(this.email,this.password)
+                  }
+              }
+              this.loading = false
+          }
       }
-    }
   }
 </script>
 <style>
@@ -67,6 +85,15 @@
     justify-content:center;
     align-items: center;
     font-family: "Roboto", sans-serif;
+  }
+  .spinnerLoginRagistration{
+    background-image: url('../../src/assets/Spinner.gif');
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
   }
   .containerLogin{
     width: 360px;
@@ -84,31 +111,24 @@
     outline: 0;
     background: #f2f2f2;
     width: 100%;
-    margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
     transition: all 1s;
-    border: 1px solid crimson;
+    border: 1px solid white;
   }
   h3{
     padding: 20px 0;
   }
   .errors{
-    position: absolute;
-    top:0;
-    height: auto;
-    width: 100vw;
-  }
-  .errors div{
-    padding: 10px;
-    width: 100%;
     display: flex;
-    justify-content: center;
-    background: crimson;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 1px;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+
+  }
+  .crimson{
+    color:crimson
   }
    button {
     font-family: "Roboto", sans-serif;
