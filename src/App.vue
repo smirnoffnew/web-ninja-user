@@ -1,5 +1,10 @@
 <template>
-    <router-view></router-view>
+   <div>
+     <router-view></router-view>
+
+     <router-view  name="login"></router-view>
+     <router-view  name="register"></router-view>
+   </div>
 </template>
 
 <script>
@@ -7,10 +12,7 @@
   import Vuetify from 'vuetify'
   import 'vuetify/dist/vuetify.min.css'
   import login from './components/login'
-
   Vue.use(Vuetify)
-
-
   export default {
       name: 'app',
       data () {
@@ -33,6 +35,7 @@
   body{
     padding: 0;
     margin: 0;
+    background: whitesmoke;
     overflow-x: hidden;
   }
 </style>

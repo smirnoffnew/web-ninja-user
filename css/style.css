@@ -1,0 +1,96 @@
+#login,#registration{
+  position: absolute;
+  top:0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.67);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+.spinnerLoginRagistration{
+  background-image: url('../src/assets/Spinner.gif');
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  color: red;
+  margin-left: auto;
+  margin-right: auto;
+}
+.containerLogin_registraton{
+  width: 360px;
+  padding: 40px;
+  background: white;
+  position: relative;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+.login_registration-form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: all 1s;
+  border: 1px solid white;
+}
+h3{
+  padding: 20px 0;
+}
+.errors{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+
+}
+.crimson{
+  color:crimson
+}
+.login_registration-form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  width: 100px;
+  border: 0;
+  background-color: darkcyan!important;
+  align-self: flex-end;
+  margin-top: 20px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 1s;
+  cursor: pointer;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+.login_registration-form button:hover{
+  background: rgb(0, 82, 82);
+}
+.message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: rebeccapurple;
+  text-decoration: none;
+}
+.close{
+  background-image: url('../src/assets/close.svg');
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  color: red;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor:pointer;
+}
